@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'rake'
 require 'date'
+require 'rake/javaextensiontask'
 
 #############################################################################
 #
@@ -147,4 +148,10 @@ task :validate do
     puts "A `VERSION` file at root level violates Gem best practices."
     exit!
   end
+end
+
+
+Rake::JavaExtensionTask.new('test_jruby_library', eval(File.read(gemspec_file))) do |ext|
+  ext.lib_dir   = "lib/jrubytesting"
+  ext.ext_dir   = 'ext/java'
 end
