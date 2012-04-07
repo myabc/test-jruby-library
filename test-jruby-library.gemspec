@@ -63,7 +63,6 @@ Gem::Specification.new do |s|
     README.md
     Rakefile
     ext/java/jrubytesting/TestJrubyLibraryService.java
-    lib/jrubytesting/test_jruby_library.jar
     lib/test-jruby-library.rb
     test-jruby-library.gemspec
     tmp/.gitkeep
