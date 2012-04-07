@@ -60,7 +60,7 @@ Gem::Specification.new do |s|
   s.files = %w[
     Gemfile
     LICENSE
-    README.markdown
+    README.md
     Rakefile
     ext/java/jrubytesting/TestJrubyLibraryService.java
     lib/jrubytesting/test_jruby_library.jar
