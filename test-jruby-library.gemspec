@@ -35,7 +35,7 @@ Gem::Specification.new do |s|
 
   ## This sections is only necessary if you have C extensions.
   s.require_paths << 'ext'
-  s.extensions = %w[Rakefile]
+  s.extensions = %w[ext/Rakefile]
 
   ## If your gem includes any executables, list them here.
   # s.executables = ["name"]
