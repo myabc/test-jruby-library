@@ -1,7 +1,6 @@
 require 'rubygems'
 require 'rake'
 require 'date'
-require 'rake/javaextensiontask'
 
 #############################################################################
 #
@@ -150,8 +149,25 @@ task :validate do
   end
 end
 
+begin
+  require 'rake/javaextensiontask'
 
-Rake::JavaExtensionTask.new('test_jruby_library', eval(File.read(gemspec_file))) do |ext|
-  ext.lib_dir   = "lib/jrubytesting"
-  ext.ext_dir   = 'ext/java'
+  Rake::JavaExtensionTask.new('test_jruby_library', eval(File.read(gemspec_file))) do |ext|
+    ext.lib_dir   = "lib/jrubytesting"
+    ext.ext_dir   = 'ext/java'
+  end
+rescue LoadError
 end
+
+task :simple_compile do
+  # Pick the right class path, depending if we're using an rvm installed JRuby
+  jruby_cpath = ENV['MY_RUBY_HOME'] || ENV['JRUBY_HOME']
+  raise 'MY_RUBY_HOME or JRUBY_HOME are not set' unless jruby_cpath
+
+  puts 'Doing a simple compilation'
+  sh %(javac -source 1.6 -target 1.6 -cp #{jruby_cpath}/lib/jruby.jar ext/java/**/*.java)
+  mkdir_p 'lib/jrubytesting'
+  sh %(jar cf lib/jrubytesting/test_jruby_library.jar -C ext/java jrubytesting/TestJrubyLibraryService.class)
+  puts
+end
+task :default => :simple_compile
