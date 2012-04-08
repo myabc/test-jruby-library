@@ -1,4 +1,4 @@
-task :simple_compile do
+task :java_compile do
   # Pick the right class path, depending if we're using an rvm installed JRuby
   jruby_cpath = ENV['MY_RUBY_HOME'] || ENV['JRUBY_HOME']
   raise 'MY_RUBY_HOME or JRUBY_HOME are not set' unless jruby_cpath
@@ -9,4 +9,13 @@ task :simple_compile do
   sh %(jar cf ../lib/jrubytesting/test_jruby_library.jar -C java jrubytesting/TestJrubyLibraryService.class)
   puts
 end
-task :default => :simple_compile
+
+task :c_compile do
+  ruby './jrubytesting/extconf.rb'
+end
+
+def is_jruby?
+  defined?(RUBY_ENGINE) && RUBY_ENGINE == 'jruby'
+end
+
+task :default => is_jruby? ? :java_compile : :c_compile
