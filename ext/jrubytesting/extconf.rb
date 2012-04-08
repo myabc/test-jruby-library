@@ -1,2 +1,2 @@
 require 'mkmf'
-create_makefile 'Test'
+create_makefile 'test_jruby_library'
