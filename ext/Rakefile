@@ -17,9 +17,6 @@ task :c_compile do
   extension_dir = File.join(gem_dir, File.dirname('ext/jrubytesting/extconf.rb'))
   dest_path     = File.join(gem_dir, 'lib/jrubytesting')
 
-  puts 'Extensiondir' << extension_dir.to_s
-  puts 'gem dir'      << File.expand_path(gem_dir.to_s)
-
   Dir.chdir(extension_dir) do
     results = Gem::Ext::ExtConfBuilder.build('extconf.rb', gem_dir, dest_path, [])
     say results.join("\n") if Gem.configuration.really_verbose
