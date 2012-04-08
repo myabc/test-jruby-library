@@ -4,9 +4,9 @@ task :simple_compile do
   raise 'MY_RUBY_HOME or JRUBY_HOME are not set' unless jruby_cpath
 
   puts 'Doing a simple compilation'
-  sh %(javac -source 1.6 -target 1.6 -cp #{jruby_cpath}/lib/jruby.jar ext/java/**/*.java)
-  mkdir_p 'lib/jrubytesting'
-  sh %(jar cf lib/jrubytesting/test_jruby_library.jar -C ext/java jrubytesting/TestJrubyLibraryService.class)
+  sh %(javac -source 1.6 -target 1.6 -cp #{jruby_cpath}/lib/jruby.jar java/**/*.java)
+  mkdir_p '../lib/jrubytesting'
+  sh %(jar cf ../lib/jrubytesting/test_jruby_library.jar -C java jrubytesting/TestJrubyLibraryService.class)
   puts
 end
 task :default => :simple_compile
