@@ -1,6 +1,10 @@
 .DS_Store
 .gitignore
 Gemfile.lock
+ext/jrubytesting/Makefile
+ext/jrubytesting/*.bundle
+ext/jrubytesting/*.o
 ext/java/**/*.class
-tmp/*
+lib/**/*.bundle
 lib/**/*.jar
+tmp/*
